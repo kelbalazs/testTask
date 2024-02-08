@@ -1,3 +1,30 @@
+<?php  
+
+function getPseudoDomain()
+{
+  $pseudoDomain = $_SERVER['SCRIPT_NAME'];
+  $pseudoDomain = str_replace('index.php?r=', '', $pseudoDomain);
+  $pseudoDomain = str_replace('index.php', '', $pseudoDomain);
+
+  return $pseudoDomain;
+}
+
+function getFullDomain()
+{
+  $fullDomain = $_SERVER['SERVER_NAME'] . (($_SERVER['SERVER_PORT'] != '80')
+      ? (':' . $_SERVER['SERVER_PORT']).getPseudoDomain()
+      : ''.getPseudoDomain());
+      
+  return str_replace(':443', '', trim($fullDomain, '/'));
+}
+
+function getHttpDomain()
+{
+  return ((isset($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http') . '://' . getFullDomain();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +34,10 @@
 
   <meta name="description" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Task</title>
+  <script src="libs/js/jquery-3.7.1.min.js"></script>
+  <script src="libs/js/script.js"></script>
   <link href="libs/css/style.css" rel="stylesheet" />
+  <title>Task</title>
 </head>
 
 <body>
@@ -78,8 +107,46 @@
       </tbody>
     </table>
   </div>
+  <script>
+    $('document').ready(function () {
 
-  <script src="libs/js/jquery-3.7.1.min.js"></script>
-  <script src="libs/js/script.js"></script>
+      if ($('#preloader').length) {
+        $('#preloader').delay(1000).fadeOut('slow', function () {
+          $(this).remove();
+        });
+      }
+    
+      // Wikipedia Search
+      $('#wikiBtn').click(function () {
+        var searchTerm = $('#wikipediaSearchInput').val().trim();
+        if (searchTerm !== '') {
+          Site.wikiSearchInit(null, '<?php echo getHttpDomain(); ?>', searchTerm);
+        } else {
+          alert('Please enter a search term.');
+        }
+      });
+    
+      // Neighbours Search
+      $('#neighbourBtn').click(function () {
+        var selectedCountry = $('#selCountry').val();
+        if (selectedCountry) {
+          Site.neighbourSearchInit(null, '<?php echo getHttpDomain(); ?>', selectedCountry);
+        } else {
+          alert('Please select a country.');
+        }
+      });
+    
+      // Country Info Search
+      $('#countryBtn').click(function () {
+        var countryCode = $('#countryCodeInput').val().trim();
+        if (countryCode !== '') {
+          Site.countryInfoSearchInit(null, '<?php echo getHttpDomain(); ?>', countryCode);
+        } else {
+          alert('Please enter a country code.');
+        }
+      });
+    
+    });
+  </script>
 </body>
 </html>
