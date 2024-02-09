@@ -26,6 +26,11 @@ curl_close($ch);
 // Decode JSON response
 $decode = json_decode($result, true);
 
+// debug
+if (!isset($decode['geonames'])) {
+    var_dump($decode);
+}
+
 // Prepare output array
 $output['status']['code'] = "200";
 $output['status']['name'] = "ok";
