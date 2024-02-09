@@ -115,6 +115,7 @@ var Site = {
   },
 
   appendCountryInfoResults: function(result) {
+    console.log('appendCountryInfoResults');
     var resultHtml = '<div class="countryInfo">';
     resultHtml += '<p><strong>Continent:</strong> ' + result.continent + '</p>';
     resultHtml += '<p><strong>Capital:</strong> ' + result.capital + '</p>';
@@ -129,6 +130,7 @@ var Site = {
   Callback method is called right after the backend successfully responsed to the frontend.
   */
   countryInfoSearchCallback: function(response) {
+    console.log('countryInfoSearchCallback');
     $.each(result, function (i, item) {
       $.each(item, function (index, val) {
         Site.appendCountryInfoResults(val);
