@@ -41,12 +41,12 @@ var Site = {
   /*
   An initializer method for wikiSearch. It starts the ajax call of the backend.
   */
-  wikiSearchInit: function(event, httpDomain, searchTerm) {
+  wikiSearchInit: function(event, protocolAndDomain, searchTerm) {
     if (event) {
       event.preventDefault();
     }
     $('#results').html('');
-    Site.callAjax('wikiSearchInit', httpDomain + '/libs/php/wikipediaAPI.php', {
+    Site.callAjax('wikiSearchInit', protocolAndDomain + '/libs/php/wikipediaAPI.php', {
         'q': searchTerm
     }, 'wikiSearchCallback');
   },
@@ -76,12 +76,12 @@ var Site = {
   /*
   An initializer method for neighbourSearch. It starts the ajax call of the backend.
   */
-  neighbourSearchInit: function(event, httpDomain, selectedCountry) {
+  neighbourSearchInit: function(event, protocolAndDomain, selectedCountry) {
     if (event) {
       event.preventDefault();
     }
     $('#results').html('');
-    Site.callAjax('neighbourSearchInit', httpDomain + '/libs/php/neighboursAPI.php', {
+    Site.callAjax('neighbourSearchInit', protocolAndDomain + '/libs/php/neighboursAPI.php', {
         'country': selectedCountry
     }, 'neighbourSearchCallback');
   },
@@ -104,12 +104,12 @@ var Site = {
   /*
   An initializer method for countrySearch. It starts the ajax call of the backend.
   */
-  countryInfoSearchInit: function(event, httpDomain, countryCode) {
+  countryInfoSearchInit: function(event, protocolAndDomain, countryCode) {
     if (event) {
       event.preventDefault();
     }
     $('#results').html('');
-    Site.callAjax('countryInfoSearchInit', httpDomain + '/libs/php/countryInfoAPI.php', {
+    Site.callAjax('countryInfoSearchInit', protocolAndDomain + '/libs/php/countryInfoAPI.php', {
         'country': countryCode
     }, 'countryInfoSearchCallback');
   },
