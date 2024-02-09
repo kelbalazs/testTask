@@ -4,7 +4,7 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 // Default country code (if not provided in the URL)
-$countryCode = isset($_GET['country']) ? $_GET['country'] : 'DE';
+$countryCode = isset($_POST['country']) ? $_POST['country'] : 'DE';
 
 // API source URL with predefined parameters and the dynamic country code
 $url = "http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&country=$countryCode&username=kelbal";
