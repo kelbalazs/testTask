@@ -140,3 +140,43 @@ var Site = {
     $('#countryCodeInput').val('');
   },
 };
+
+$('document').ready(function () {
+
+  if ($('#preloader').length) {
+    $('#preloader').delay(1000).fadeOut('slow', function () {
+      $(this).remove();
+    });
+  }
+
+  // Wikipedia Search
+  $('#wikiBtn').click(function () {
+    var searchTerm = $('#wikipediaSearchInput').val().trim();
+    if (searchTerm !== '') {
+      Site.wikiSearchInit(null, '', searchTerm);
+    } else {
+      alert('Please enter a search term.');
+    }
+  });
+
+  // Neighbours Search
+  $('#neighbourBtn').click(function () {
+    var selectedCountry = $('#selCountry').val();
+    if (selectedCountry) {
+      Site.neighbourSearchInit(null, '', selectedCountry);
+    } else {
+      alert('Please select a country.');
+    }
+  });
+
+  // Country Info Search
+  $('#countryBtn').click(function () {
+    var countryCode = $('#countryCodeInput').val().trim();
+    if (countryCode !== '') {
+      Site.countryInfoSearchInit(null, '', countryCode);
+    } else {
+      alert('Please enter a country code.');
+    }
+  });
+
+});
