@@ -131,7 +131,7 @@ var Site = {
   */
   countryInfoSearchCallback: function(response) {
     console.log('countryInfoSearchCallback');
-    $.each(result, function (i, item) {
+    $.each(response, function (i, item) {
       $.each(item, function (index, val) {
         Site.appendCountryInfoResults(val);
       });
