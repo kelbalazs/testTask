@@ -4,7 +4,7 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 // Retrieve the search term from the request
-$searchTerm = isset($_GET['q']) ? $_GET['q'] : '';
+$searchTerm = isset($_POST['q']) ? $_POST['q'] : '';
 
 // API source url with predefined parameters 
 $url = "http://api.geonames.org/wikipediaSearchJSON?formatted=true&q=" . urlencode($searchTerm) . "&maxRows=10&username=kelbal&style=full";
